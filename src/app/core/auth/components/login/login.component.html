@@ -1,0 +1,27 @@
+<div class="container auth-page">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4">
+        <h4 class="mb-3">Login</h4>
+
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input formControlName="username" class="form-control" placeholder="username" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" formControlName="password" class="form-control" placeholder="password" />
+        </div>
+
+        <button class="btn btn-primary w-100" [disabled]="form.invalid || loading">
+          {{ loading ? 'Signing in...' : 'Sign in' }}
+        </button>
+
+        <div class="mt-3 text-center">
+          <a routerLink="/register">Don't have an account? Register</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
