@@ -1,0 +1,17 @@
+<nav class="topbar">
+  <button class="hamburger" (click)="toggle()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="brand">Tracker</div>
+</nav>
+
+<aside class="sidebar" [class.open]="sidebarOpen" role="navigation">
+  <ul class="menu">
+    <li class="menu-item"><a (click)="navigateTo('/dashboard')" tabindex="0">Dashboard</a></li>
+    <li class="menu-item"><a (click)="navigateTo('/habits')" tabindex="0">Habits</a></li>
+    <li class="menu-item"><a (click)="logout()" tabindex="0">Logout</a></li>
+  </ul>
+</aside>
+
+
+<div class="overlay" *ngIf="sidebarOpen" (click)="toggle()"></div>
