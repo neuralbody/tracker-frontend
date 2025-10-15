@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h5>Shopping list</h5>
+  <div>
+    <button class="btn btn-sm btn-outline-primary me-2" (click)="showCreateRecipe = !showCreateRecipe">Create a recipe</button>
+    <button class="btn btn-sm btn-primary" (click)="showCreateList = !showCreateList">Create a list</button>
+  </div>
+</div>
+
+<div *ngIf="showCreateRecipe" class="mb-3">
+  <app-recipe-form (created)="onRecipeCreated($event)"></app-recipe-form>
+</div>
+
+<div *ngIf="showCreateList" class="mb-3">
+  <app-shopping-list-form [recipes]="recipes" (created)="onListCreated($event)"></app-shopping-list-form>
+</div>
+
+<hr/>
+
+<div *ngIf="loading" class="text-center p-3">Loading...</div>
+
+<div class="list-group" *ngIf="!loading">
+  <div *ngFor="let l of lists" class="list-group-item d-flex justify-content-between align-items-start">
+    <div (click)="openList(l)" style="cursor:pointer">
+      <div class="fw-bold">{{ l.title }}</div>
+      <small class="text-muted">{{ l.ingredients?.length || 0 }} articles — {{ l.createdAt | date:'short' }}</small>
+    </div>
+    <div>
+      <button class="btn btn-sm btn-outline-secondary me-2" (click)="openList(l)">Show</button>
+      <button class="btn btn-sm btn-danger" (click)="deleteList(l)">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedList" class="mt-3">
+  <h6>Detail: {{ selectedList.title }}</h6>
+  <ul class="list-unstyled">
+    <li *ngFor="let it of selectedList.ingredients" class="py-1 border-bottom">
+      {{ it.name }} <small class="text-muted">x {{ it.quantity || 1 }}</small>
+    </li>
+  </ul>
+
+  <div class="mt-3">
+    <label class="form-label">Add an existing recipe</label>
+    <select class="form-select mb-2" #sel>
+      <option *ngFor="let r of recipes" [value]="r.id">{{ r.title }}</option>
+    </select>
+    <button class="btn btn-sm btn-outline-primary me-2" (click)="addRecipeToList(selectedList, +sel.value)">Add recipe</button>
+
+    <hr/>
+
+    <div class="d-flex gap-2">
+      <input #iname class="form-control form-control-sm" placeholder="Name of the ingredient"/>
+      <input #iqty class="form-control form-control-sm" style="width:110px" placeholder="Qty"/>
+      <button class="btn btn-sm btn-primary" (click)="addIngredientToList(selectedList, { name: iname.value, quantity: iqty.value })">Add ingredient</button>
+    </div>
+  </div>
+</div>

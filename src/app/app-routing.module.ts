@@ -12,8 +12,14 @@ const routes: Routes = [
     loadComponent: () => import('./modules/dashboard/dashboard.component').then(m => m.DashboardComponent),
     canActivate : [authGuard],
   },
+  { 
+    path: 'shopping', 
+    loadComponent: () => import('./modules/shopping/shopping-page/shopping-page.component').then(m => m.ShoppingPageComponent),
+    canActivate: [authGuard]
+  },
+
   { path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 @NgModule({
