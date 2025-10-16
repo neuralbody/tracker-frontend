@@ -72,13 +72,17 @@ export class ShoppingListFormComponent {
     };
 
     this.shoppingService.createList(payload).subscribe({
-      next: l => {
-        this.created.emit(l);
+      next: list => {
+        (this as any).modalRef?.close(list);
+
         this.form.reset();
-        while(this.ingredients.length) this.ingredients.removeAt(0);
+        this.ingredients.clear();
         this.addItem();
       },
-      error: () => alert('Erreur création liste')
+      error: err => {
+        console.error(err);
+        (this as any).modalRef?.close(null);
+      }
     });
   }
 }

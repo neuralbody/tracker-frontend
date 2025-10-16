@@ -5,9 +5,10 @@ import { RegisterComponent } from './core/auth/components/register/register.comp
 import { authGuard } from './core/auth/guards/auth.guard';
 
 const routes: Routes = [
+  
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // placeholder dashboard route (will create later)
+
   { path: 'dashboard', 
     loadComponent: () => import('./modules/dashboard/dashboard.component').then(m => m.DashboardComponent),
     canActivate : [authGuard],

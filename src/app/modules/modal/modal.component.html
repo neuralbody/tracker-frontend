@@ -1,0 +1,18 @@
+<!-- l'ancre est DANS le modal content (unique) -->
+<div class="modal-host-root" [class.open]="open" [attr.aria-hidden]="open ? 'false' : 'true'">
+  <div class="modal-overlay" (click)="onBackdropClick()"></div>
+
+  <div class="modal-wrapper" role="dialog" [ngClass]="modalSizeClass">
+    <div class="modal-dialog" [ngClass]="dialogCentered ? 'modal-dialog-centered' : ''">
+      <div class="modal-content">
+        <div class="modal-body p-3">
+          <button type="button" class="btn-close float-end" aria-label="Close" (click)="close()"></button>
+
+          <!-- <-- UNIQUE ancre pour insertion du composant -->
+          <ng-template #vc></ng-template>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

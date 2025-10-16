@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Ingredient, Recipe, ShoppingList } from '../../../core/models/shoppingModels';
 import { ShoppingService } from '../../../core/services/shopping.service';
+import { ModalService } from '../../../core/services/modal.service';
 
 @Component({
   selector: 'app-shopping-panel',
@@ -22,7 +23,7 @@ export class ShoppingPanelComponent implements OnInit {
   showCreateList = false;
   showCreateRecipe = false;
 
-  constructor(private shoppingService: ShoppingService) {}
+  constructor(private shoppingService: ShoppingService, private modalService: ModalService) {}
 
   ngOnInit(): void {
     this.load();
@@ -81,4 +82,19 @@ export class ShoppingPanelComponent implements OnInit {
       error: () => alert('Erreur suppression')
     });
   }
+
+  openCreateListModal() {
+    this.modalService.open(ShoppingListFormComponent, { recipes: this.recipes })
+      .subscribe((result: any) => {
+        if (result) this.lists.unshift(result);
+      });
+  }
+
+  openCreateRecipeModal() {
+    this.modalService.open(RecipeFormComponent)
+      .subscribe((result: any) => {
+        if (result) this.recipes.unshift(result);
+      });
+  }
+
 }

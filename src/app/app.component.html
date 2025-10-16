@@ -1,6 +1,10 @@
+
 <app-navbar *ngIf="isLogged$ | async" (toggleSide)="onSidebarToggle($event)"></app-navbar>
 
 <!-- main content area, the class changes when sidebar open -->
 <main class="app-main" [class.sidebar-open]="sidebarOpen">
+  <app-modal-host></app-modal-host>
   <router-outlet></router-outlet>
 </main>
+
+<app-footer></app-footer>

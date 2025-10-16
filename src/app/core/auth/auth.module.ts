@@ -5,13 +5,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent
-  ],
   imports: [
     SharedModule,
-    RouterModule
+    RouterModule,
+    LoginComponent,
+    RegisterComponent
   ],
   exports: [
     LoginComponent,

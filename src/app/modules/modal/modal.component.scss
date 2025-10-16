@@ -1,0 +1,89 @@
+.modal-host-root {
+  pointer-events: none;
+}
+
+/* overlay : fond sombre centré */
+.modal-host-root .modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* backdrop : couvre toute la surface (sous le contenu du modal) */
+.modal-host-root .modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+/* wrapper qui contient le dialog (centre et affiche le modal) */
+.modal-host-root .modal-wrapper {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2001;
+  pointer-events: none;
+}
+
+/* Quand le host est ouvert, overlay + wrapper deviennent visibles et cliquables */
+.modal-host-root.open .modal-overlay,
+.modal-host-root.open .modal-wrapper {
+  display: flex;
+  pointer-events: auto;
+}
+
+/* Le "modal" interne — conteneur relatif du contenu */
+.modal-host-root .modal {
+  position: relative;
+  z-index: 2002; /* au-dessus du wrapper/backdrop */
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+/* Dialog (contrôle la largeur maximale) */
+.modal-host-root .modal-dialog,
+.modal-host-root .modal-wrapper .modal-dialog {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Content */
+.modal-host-root .modal-content {
+  background: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+/* Body du modal */
+.modal-host-root .modal-body {
+  padding: 1rem;
+  position: relative;
+}
+
+/* Bouton close */
+.modal-host-root .btn-close {
+  cursor: pointer;
+}
+
+/* Cursor helper */
+.cursor-pointer { cursor: pointer; }
+
+/* Responsive */
+@media (max-width: 575.98px) {
+  .modal-host-root .modal-dialog {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+}

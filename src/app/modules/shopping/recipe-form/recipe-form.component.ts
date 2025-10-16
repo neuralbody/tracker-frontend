@@ -9,7 +9,7 @@ import { Recipe } from '../../../core/models/shoppingModels';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './recipe-form.component.html',
-  styleUrl: './recipe-form.component.scss'
+  styleUrls: ['./recipe-form.component.scss']
 })
 export class RecipeFormComponent {
   @Output() created = new EventEmitter<Recipe>();
@@ -41,21 +41,25 @@ export class RecipeFormComponent {
     const raw = this.form.value;
 
     const payload: Partial<Recipe> = {
-      title: (raw.title ?? '').toString(),
-      ingredients: (raw.ingredients ?? []).map((it: any) => ({
-        name: (it.name ?? '').toString(),
-        quantity: (it.quantity ?? '').toString()
+      title: (raw.title ?? '').toString().trim(),
+      ingredients: (raw.ingredients ?? []).map(it => ({
+        name: (it?.name ?? '').toString().trim(),
+        quantity: (it?.quantity ?? '1').toString().trim()
       }))
     };
 
     this.shoppingService.createRecipe(payload).subscribe({
-      next: r => {
-        this.created.emit(r);
+      next: recipe => {
+        (this as any).modalRef?.close(recipe);
+        
         this.form.reset();
-        while(this.ingredients.length) this.ingredients.removeAt(0);
+        this.ingredients.clear();
         this.addIngredient();
       },
-      error: () => alert('Erreur création recette')
+      error: err => {
+        console.error(err);
+        (this as any).modalRef?.close(null);
+      }
     });
   }
 }

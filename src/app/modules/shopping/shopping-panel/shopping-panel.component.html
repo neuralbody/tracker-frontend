@@ -1,17 +1,9 @@
 <div class="d-flex justify-content-between align-items-center mb-2">
   <h5>Shopping list</h5>
   <div>
-    <button class="btn btn-sm btn-outline-primary me-2" (click)="showCreateRecipe = !showCreateRecipe">Create a recipe</button>
-    <button class="btn btn-sm btn-primary" (click)="showCreateList = !showCreateList">Create a list</button>
+    <button class="btn btn-sm btn-outline-primary me-2" (click)="openCreateRecipeModal()">Create a recipe</button>
+    <button class="btn btn-sm btn-primary" (click)="openCreateListModal()">Create a list</button>
   </div>
-</div>
-
-<div *ngIf="showCreateRecipe" class="mb-3">
-  <app-recipe-form (created)="onRecipeCreated($event)"></app-recipe-form>
-</div>
-
-<div *ngIf="showCreateList" class="mb-3">
-  <app-shopping-list-form [recipes]="recipes" (created)="onListCreated($event)"></app-shopping-list-form>
 </div>
 
 <hr/>

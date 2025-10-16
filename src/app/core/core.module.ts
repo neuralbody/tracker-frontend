@@ -6,11 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [NavbarComponent],
-  imports: [CommonModule, RouterModule],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
-  ],
+  imports: [CommonModule, RouterModule, NavbarComponent],
   exports: [NavbarComponent]
 })
 export class CoreModule {
